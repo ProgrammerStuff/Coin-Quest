@@ -1,6 +1,10 @@
 # Coin-Quest
 A simple pygame platformer
 
+//
+NOTE: THIS IS A TEST BRANCH! IT IS NOT MENT FOR NORMAL USE. Instability is to be expected.
+//
+
 All items in this github repository are to be considered dependancies and the game cannot run without them unless said otherwise (like saying DEV on a item).
 
 All items are free to use and take, however I would like atleast some credit.
