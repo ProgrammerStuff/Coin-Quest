@@ -1,4 +1,4 @@
-#Made byMichael Burgin, 2022
+#Made by Michael Burgin, 2022
 #This is a simple 2d side-scrolling platformer game
 
 print("Loading")
