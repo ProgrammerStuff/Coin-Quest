@@ -1,5 +1,4 @@
-#Made by Michael Burgin, 2022
-#With help by Finn Ostrum
+#Made byMichael Burgin, 2022
 #This is a simple 2d side-scrolling platformer game
 
 print("Loading")
@@ -10,6 +9,7 @@ from pygame.locals import *
 import sys
 import os
 import keyboard
+import random
 #import keyboard
 
 
@@ -39,8 +39,9 @@ Up_button = "W"
 Down_button = "S"
 Left_button = "A"
 Right_button = "D"
-Special_button = "Key.space"
-Pause_buton = "Key.escape"
+Special_button = "space"
+Start_button = "enter"
+Pause_buton = "escape"
 
 
 #Classes
@@ -49,8 +50,8 @@ class GraphicalTools:
     #This puts up text in a select place in a typewriter fasion.
     #Input is a string in which we want to place on screen, speed is time (in seconds) between each character placement
     #Startplacex/y is the x and y of where we will start placeing text. Length is the amount of characters to print before newlining.
-    def Typewriter(input, speed, startplacex, startplacey, length):
-        for letter in input:
+    def Typewriter(Input, speed, startplacex, startplacey, length):
+        for letter in Input:
             pass
 
 
@@ -84,6 +85,8 @@ class GameFramework:
             return
         else:
             print("Error at GameFramework.Framecheck - Invalid checktype - Please contact developer at michael@burgin.us")
+            #shut down systems. Destroy the pygame layer and the backend execution
+            pygame.quit()
             sys.exit(-1)
 
 
@@ -105,12 +108,56 @@ class FileIO:
         pass
 
 
+#main player sprite
+#to be honest I copied this from the internet, not because I'm lazy but because I'm still learning. https://www.geeksforgeeks.org/pygame-creating-sprites/
+class player(pygame.sprite.Sprite):
+    def __init__(self, color, surface_color, height, width):
+        super().__init__()
+
+        self.image = pygame.Surface([width, height])
+        self.image.fill = surface_color()
+        self.image.set_colorkey(color)
+        pygame.draw.rect(self.image, color, pygame.Rect(0, 0, width, height))
+
+        self.rect = self.image.get_rect()
+
+
 class Levels:
+    def TitleSceenMainMenu():
+        levelnumber = 0
+        #The fadeout sequence
+        isSequenceFinished = 0
+        FadeRed = 255
+        FadeGreen = 255
+        FadeBlue = 255
+        while red > 0:
+            canvas.fill((FadeRed, FadeBlue, FadeGreen))
+            FadeRed -= 5
+            FadeBlue -=5
+            FadeGreen -=5
+            pygame.display.flip()
+        pygame.display.flip()
+        time.sleep(1)
+        #Main menu
+        canvas.fill((97, 49, 14))
+        return
+
+
     #main titlescreen loop
     def TitleScreen():
+        levelnumber = 0
+        sprites_list = pygame.sprite.Group()
         slowtimer = 0
         totaltimer = 0
-        keyboard.add_hotkey("enter", TitleScreenMainMenu())
+        moveon = 0
+        keyboard.add_hotkey(Start_button, lambda: TitleScreenMainMenu())
+
+        #setup sprite
+        #player_ = Player(red, teal, 50, 25)
+        #player_.rect.x = 500
+        #player_.rect.y = 325
+        #sprites_list.add(player_)
+
         while a == 0:
             canvas.fill(white)
             canvas.blit(TitleScreenImage, dest = origin)
@@ -131,6 +178,8 @@ class Levels:
                 slowtimer = 0
                 totaltimer += 1
 
+            if moveon == 1:
+                TitleScreenMainMenu()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -138,21 +187,6 @@ class Levels:
             pygame.display.flip()
             #locks game to 60fps, can be increased if requried however
             time.sleep(0.017)
-
-
-    def TitleSceenMainMenu():
-        #The fadeout sequence
-        isSequenceFinished = 0
-        FadeRed = 255
-        FadeGreen = 255
-        FadeBlue = 255
-        while red > 0:
-            canvas.fill((FadeRed, FadeBlue, FadeGreen))
-            FadeRed -= 5
-            FadeBlue -=5
-            FadeGreen -=5
-            pygame.display.flip()
-        return
 
 
 
