@@ -124,6 +124,7 @@ class player(pygame.sprite.Sprite):
 
 class Levels:
     def MainMenu(s):
+        a = 1
         levelnumber = 0
         #The fadeout sequence
         isSequenceFinished = 0
@@ -131,16 +132,23 @@ class Levels:
         FadeGreen = 255
         FadeBlue = 255
         while FadeRed > 0:
+            #Gradually change the RGB values of the screen, making a good darkening effect
             canvas.fill((FadeRed, FadeBlue, FadeGreen))
             FadeRed -= 5
             FadeBlue -= 5
             FadeGreen -= 5
             pygame.display.flip()
             time.sleep(0.017)
+
+
+        canvas.fill((0, 0, 0))
         pygame.display.flip()
         time.sleep(2)
         #Main menu
-        canvas.fill((97, 49, 14))
+        while a == 1:
+            canvas.fill((97, 49, 14))
+            pygame.display.flip()
+            time.sleep(0.017)
 
 
 
@@ -153,24 +161,20 @@ class Levels:
         moveon = 0
         keyboard.add_hotkey(Start_button, lambda: self.MainMenu())
 
-        #setup sprite
-        #player_ = Player(red, teal, 50, 25)
-        #player_.rect.x = 500
-        #player_.rect.y = 325
-        #sprites_list.add(player_)
-
+        '''setup sprite
+        player_ = Player(red, teal, 50, 25)
+        player_.rect.x = 500
+        player_.rect.y = 325
+        sprites_list.add(player_)'''
+        a = 0
         while a == 0:
+            print("hi")
             canvas.fill(white)
             canvas.blit(TitleScreenImage, dest = origin)
             canvas.blit(PlayerSprite1, (245, 580))
             #To display a number on the top right
             #This is diognositic tools for the developer version! Will remove in release. =====================================
-            str_position = str(pygame.mouse.get_pos())
-            str_slowtimer = str(slowtimer)
-            str_totaltimer = str(totaltimer)
-            GraphicalTools.TextBoxMaker('freesansbold.ttf', 100, 50, str_position, 32, black, teal)
-            GraphicalTools.TextBoxMaker('freesansbold.ttf', 900, 50, str_slowtimer, 32, black, teal)
-            GraphicalTools.TextBoxMaker('freesansbold.ttf', 800, 50, str_totaltimer, 32, black, teal)
+
             #==================================================================================================================
 
             if slowtimer < 20:
@@ -201,6 +205,7 @@ TitleScreenImage = pygame.image.load("Homescreen1000x650.png")
 PlayerSprite1 = pygame.image.load("Player1.png")
 
 def main():
+
     pygame.init()
     Gamertime = True
     #main game loop
@@ -209,6 +214,8 @@ def main():
         #Switch to appropiate level
         if levelnumber == 0:
             x.TitleScreen()
+            levelnumber += 1
+            Gamertime == false #stop the loop tempoarily
 
 
         #Check if user closed window
