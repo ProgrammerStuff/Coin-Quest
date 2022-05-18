@@ -1,4 +1,4 @@
-#Made by Michael Burgin, 2022
+#Made byMichael Burgin, 2022
 #This is a simple 2d side-scrolling platformer game
 
 print("Loading")
@@ -12,7 +12,7 @@ import keyboard
 import random
 #import keyboard
 
-
+keyboard.add_hotkey("esc", lambda: sys.exit(0))
 #Global variables
 #D O  N O T  D E L E T E  "a = 0" I T  W I L L  B R E A K  E V E R Y T H I N G
 a = 0
@@ -123,34 +123,35 @@ class player(pygame.sprite.Sprite):
 
 
 class Levels:
-    def TitleSceenMainMenu():
+    def MainMenu(s):
         levelnumber = 0
         #The fadeout sequence
         isSequenceFinished = 0
         FadeRed = 255
         FadeGreen = 255
         FadeBlue = 255
-        while red > 0:
+        while FadeRed > 0:
             canvas.fill((FadeRed, FadeBlue, FadeGreen))
             FadeRed -= 5
-            FadeBlue -=5
-            FadeGreen -=5
+            FadeBlue -= 5
+            FadeGreen -= 5
             pygame.display.flip()
+            time.sleep(0.017)
         pygame.display.flip()
-        time.sleep(1)
+        time.sleep(2)
         #Main menu
         canvas.fill((97, 49, 14))
-        return
+
 
 
     #main titlescreen loop
-    def TitleScreen():
+    def TitleScreen(self):
         levelnumber = 0
         sprites_list = pygame.sprite.Group()
         slowtimer = 0
         totaltimer = 0
         moveon = 0
-        keyboard.add_hotkey(Start_button, lambda: TitleScreenMainMenu())
+        keyboard.add_hotkey(Start_button, lambda: self.MainMenu())
 
         #setup sprite
         #player_ = Player(red, teal, 50, 25)
@@ -178,8 +179,6 @@ class Levels:
                 slowtimer = 0
                 totaltimer += 1
 
-            if moveon == 1:
-                TitleScreenMainMenu()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -205,10 +204,11 @@ def main():
     pygame.init()
     Gamertime = True
     #main game loop
+    x = Levels()
     while Gamertime == True:
         #Switch to appropiate level
         if levelnumber == 0:
-            Levels.TitleScreen()
+            x.TitleScreen()
 
 
         #Check if user closed window
