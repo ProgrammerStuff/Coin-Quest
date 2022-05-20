@@ -37,6 +37,8 @@ teal = (0, 255, 255)
 indago = (192, 107, 255)
 purple = (150, 0, 150)
 black = (0, 0, 0)
+brown = (97, 49, 14)
+lightbrown = (127, 79, 44)
 
 #Keybinds, if you want to change them.
 A_button = "K"
@@ -82,7 +84,13 @@ class GameFramework:
     #type 0 = title/menu checking, type 1 = normal gameplay, type 2 = cutscenes (if applicable), type 3 = bossfights
     def FrameCheck(checktype):
         if checktype == 0:
-            return
+            GraphicalTools.TextBoxMaker("freesansbold.ttf", 900, 100, slowtimer, 32, white, brown)
+            pygame.display.flip()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit(0)
+
+
         elif checktype == 1:
             return
         elif checktype == 2:
@@ -131,6 +139,7 @@ class player(pygame.sprite.Sprite):
 class Levels:
     def MainMenu(s):
         global levelnumber
+        global slowtimer
         levelnumber = 1
         #The fadeout sequence
         isSequenceFinished = 0
@@ -149,14 +158,30 @@ class Levels:
 
         canvas.fill((0, 0, 0))
         pygame.display.flip()
-        time.sleep(2)
+        time.sleep(1)
         #Main menu
         while levelnumber == 1:
-            canvas.fill((97, 49, 14))
-            pygame.display.flip()
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit(0)
+            canvas.fill(brown)
+
+            #Add window elements
+            GraphicalTools.TextBoxMaker("freesansbold.ttf", 475, 100, "Select a savefile.", 40, white, brown)
+            pygame.draw.rect(canvas, lightbrown, [25, 200, 200, 400], 0)
+            pygame.draw.rect(canvas, lightbrown, [275, 200, 200, 400], 0)
+            pygame.draw.rect(canvas, lightbrown, [525, 200, 200, 400], 0)
+            pygame.draw.rect(canvas, lightbrown, [775, 200, 200, 400], 0)
+            GraphicalTools.TextBoxMaker("freesansbold.ttf", 100, 225, "File #1", 40, white, lightbrown)
+            GraphicalTools.TextBoxMaker("freesansbold.ttf", 350, 225, "File #2", 40, white, lightbrown)
+            GraphicalTools.TextBoxMaker("freesansbold.ttf", 600, 225, "File #3", 40, white, lightbrown)
+            GraphicalTools.TextBoxMaker("freesansbold.ttf", 850, 225, "File #4", 40, white, lightbrown)
+            #mundane tasks that need to be done
+            if slowtimer < 20:
+                slowtimer += 1
+            else:
+                slowtimer = 0
+
+            if slowtimer == 19:
+                GameFramework.FrameCheck(0)
+
             time.sleep(0.017)
 
 
@@ -206,7 +231,7 @@ class Levels:
 #Create the canvas on which we put the game on
 canvas = pygame.display.set_mode((1000, 650))
 #Title of window
-pygame.display.set_caption("Platformer game by Michael Burgin")
+pygame.display.set_caption("Coinquest v0.0")
 TitleScreenImage = pygame.image.load("Homescreen1000x650.png")
 PlayerSprite1 = pygame.image.load("Player1.png")
 
