@@ -4,6 +4,7 @@
 print("Loading")
 #Imports
 import pygame
+import playsound
 import time
 from pygame.locals import *
 import sys
@@ -12,7 +13,7 @@ import keyboard
 import random
 #import keyboard
 
-keyboard.add_hotkey("esc", lambda: sys.exit(0))
+
 #Global variables
 #D O  N O T  D E L E T E  "a = 0" I T  W I L L  B R E A K  E V E R Y T H I N G
 a = 0
@@ -20,6 +21,12 @@ origin = (0, 0)
 levelnumber = 0
 #Resets every 20 frames, used to update more intensive elements
 slowtimer = 0
+
+#ingame stats
+score = 0
+seconds = 0
+minutes = 0
+hours = 0
 
 white = (255, 255, 255)
 red = (255, 0, 0)
@@ -160,7 +167,7 @@ class Levels:
         totaltimer = 0
         moveon = 0
         keyboard.add_hotkey(Start_button, lambda: self.MainMenu())
-
+        print("hi2")
         '''setup sprite
         player_ = Player(red, teal, 50, 25)
         player_.rect.x = 500
@@ -207,24 +214,12 @@ PlayerSprite1 = pygame.image.load("Player1.png")
 def main():
 
     pygame.init()
-    Gamertime = True
     #main game loop
     x = Levels()
-    while Gamertime == True:
-        #Switch to appropiate level
-        if levelnumber == 0:
-            x.TitleScreen()
-            levelnumber += 1
-            Gamertime == false #stop the loop tempoarily
+    #Switch to appropiate level
+    if levelnumber == 0:
+        x.TitleScreen()
 
-
-        #Check if user closed window
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit(0)
-
-        #update the screen
-        pygame.display.flip()
 
 
 if __name__ == "__main__":
