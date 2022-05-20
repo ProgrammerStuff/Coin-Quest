@@ -6,3 +6,5 @@ All items in this github repository are to be considered dependancies and the ga
 All items are free to use and take, however I would like atleast some credit.
 
 If you have any helpful entries, feel free to insert them 🙂
+
+##Make sure to read the dependancy list!
