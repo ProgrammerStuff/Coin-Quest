@@ -4,7 +4,7 @@
 print("Loading")
 #Imports
 import pygame
-import playsound
+from playsound import playsound
 import time
 from pygame.locals import *
 import sys
@@ -16,7 +16,6 @@ import random
 
 #Global variables
 #D O  N O T  D E L E T E  "a = 0" I T  W I L L  B R E A K  E V E R Y T H I N G
-a = 0
 origin = (0, 0)
 levelnumber = 0
 #Resets every 20 frames, used to update more intensive elements
@@ -131,8 +130,8 @@ class player(pygame.sprite.Sprite):
 
 class Levels:
     def MainMenu(s):
-        a = 1
-        levelnumber = 0
+        global levelnumber
+        levelnumber = 1
         #The fadeout sequence
         isSequenceFinished = 0
         FadeRed = 255
@@ -152,29 +151,29 @@ class Levels:
         pygame.display.flip()
         time.sleep(2)
         #Main menu
-        while a == 1:
+        while levelnumber == 1:
             canvas.fill((97, 49, 14))
             pygame.display.flip()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit(0)
             time.sleep(0.017)
 
 
 
     #main titlescreen loop
     def TitleScreen(self):
-        levelnumber = 0
         sprites_list = pygame.sprite.Group()
         slowtimer = 0
         totaltimer = 0
         moveon = 0
         keyboard.add_hotkey(Start_button, lambda: self.MainMenu())
-        print("hi2")
         '''setup sprite
         player_ = Player(red, teal, 50, 25)
         player_.rect.x = 500
         player_.rect.y = 325
         sprites_list.add(player_)'''
-        a = 0
-        while a == 0:
+        while levelnumber == 0:
             print("hi")
             canvas.fill(white)
             canvas.blit(TitleScreenImage, dest = origin)
