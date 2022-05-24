@@ -7,4 +7,6 @@ All items are free to use and take, however I would like atleast some credit.
 
 If you have any helpful entries, feel free to insert them 🙂
 
-##Make sure to read the dependancy list!
+#Credits:
+Michael Burgin - programmer and asset maker
+Finn - help with programming and other items (he helped alot)
