@@ -7,7 +7,9 @@ All items are free to use and take, however I would like atleast some credit.
 
 If you have any helpful entries, feel free to insert them 🙂
 
-#Credits:
+Credits:
+
+
 Michael Burgin - programmer and asset maker
 
 
